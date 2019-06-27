@@ -5,7 +5,7 @@ import { Header, Grid, List, Label, Table, Divider, Message } from 'semantic-ui-
 import UTTT from '@socialgorithm/ultimate-ttt';
 import { ME, OPPONENT } from '@socialgorithm/ultimate-ttt/dist/model/constants';
 
-import UTTTGame from '../../../components/UTTTGame';
+import UTTTGame from '../../../components/Match/Game/UTTT';
 
 const PLAYER_YOU = ME;
 const PLAYER_OPPONENT = OPPONENT;

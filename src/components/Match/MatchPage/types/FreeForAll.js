@@ -7,7 +7,7 @@ import {
 } from "semantic-ui-react";
 
 import Match from '../Match';
-import UTTTGame from '../../../UTTTGame';
+import UTTTGame from '../../Game/UTTT';
 
 export default class MatchPage extends React.PureComponent {
 
