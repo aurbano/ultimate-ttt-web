@@ -41,6 +41,7 @@ class LobbyAdmin extends React.PureComponent {
             activePlayersDrop: false,
             connectedPlayersDrop: false,
             showTournament: true,
+            joinCommandCopyIcon: 'copy',
         };
     }
 
@@ -394,13 +395,38 @@ class LobbyAdmin extends React.PureComponent {
             padding: '1em 1em 0',
             fontSize: '0.9em',
         };
+        const joinCommandStyle= {
+            marginLeft: '5px',
+        }
         const host = this.props.socket.socket.io.uri;
         return (
             <div style={ connectStyle }>
                 <p>Connect your player:</p>
-                <pre className='code'>$ uabc --host "{host}" --lobby "{this.token()}" --token "your team name" -f "path/to/executable"</pre>
+                <pre className='code'>
+                    <Button
+                    size='mini'
+                    icon= { this.state.joinCommandCopyIcon }
+                    title='Click to copy'
+                    onClick={ this.copyJoinCommandToClipboard }
+                    />
+                    <span id='joincommand' style={ joinCommandStyle }>
+                       uabc --host "{host}" --lobby "{this.token()}" --token "your team name" -f "path/to/executable" 
+                    </span>
+                </pre>
             </div>
         );
+    };
+
+    copyJoinCommandToClipboard = () => {
+        const textToCopy = document.getElementById('joincommand').textContent;
+        const textArea = document.createElement('textarea');
+        textArea.textContent = textToCopy;
+        document.body.append(textArea);
+        textArea.select();
+        textArea.setSelectionRange(0, 99999); /*For mobile devices*/
+        document.execCommand("copy");
+        this.setState({joinCommandCopyIcon: 'check'});
+        setTimeout(() => { this.setState({joinCommandCopyIcon: 'copy'} ) }, 2000);
     };
 
     addAllConnectedPlayers = () => {
