@@ -83,7 +83,18 @@ class LobbyAdmin extends React.PureComponent {
         });
         
         this.props.socket.socket.on("GameList", data => {
-            this.setState({availableGames: data});
+            this.setState({availableGames: data}, () => {
+                //Select first available game if nothing selected
+                if(this.state.tournamentOptions.gameAddress === null && this.state.availableGames.length > 0) {
+                    const firstGame = this.state.availableGames[0];
+                    if(firstGame.healthy) {
+                        this.setState({tournamentOptions: {
+                            ...this.state.tournamentOptions,
+                            gameAddress: firstGame.address
+                        }});
+                    }
+                }
+            });
         });
 
 	    this.props.socket.socket.on('lobby tournament started', data => {
