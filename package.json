@@ -34,7 +34,7 @@
     "classnames": "^2.2.6",
     "history": "^4.9.0",
     "immutable": "^3.8.2",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
     "qs": "^6.7.0",
     "rc-slider": "^7.0.8",
